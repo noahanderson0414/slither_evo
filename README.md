@@ -18,3 +18,6 @@ in your shell.
 > You can also add the Poetry venv to the
 > `VIRTUAL_ENV` environment variable and run
 > Python normally.
+
+## Features
+- [-] TODO
