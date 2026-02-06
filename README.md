@@ -2,6 +2,12 @@
 
 ## Installation
 This repository uses Poetry for package management.
+Installing the repository consists of installing Poetry
+and cloning the repository.
+
+> [!NOTE]
+> You can find more info for
+> how install Poetry [here](https://python-poetry.org/docs/).
 
 ## Usage
 Running Slither.evo is simple:
