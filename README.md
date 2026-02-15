@@ -20,4 +20,21 @@ in your shell.
 > Python normally.
 
 ## Features
-- [-] TODO
+- [-] Player controlled character
+- [-] Non-player controlled characters
+- [-] Slither.io-like movement
+- [-] Collectible food randomly populated on map which give you points for upgrades
+- [-] Level-based upgrades for player, e.g. speed, size, etc.
+- [-] Species for enemies with specific characteristics
+- [-] Start game with defined number of enemies, once won prompt player if they want a progressively harder endless mode
+- [-] Player controlled color of character
+- [-] Score when you win
+- [-] All characters are killed by Tron rules (colliding with head)
+- [-] More and more enemies spawn as time goes on
+
+## Optional Features
+- [-] AI-controlled character
+- [-] Automatic size growth independent from upgrades
+- [-] Multiplayer
+- [-] Scoreboard
+- [-] Multiple map sizes
