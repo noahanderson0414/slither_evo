@@ -1,43 +1,32 @@
-# Example file showing a circle moving on screen
 import pygame
+from modules.snake import Snake
 
-# pygame setup
+# Initialize Pygame.
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
-dt = 0
-
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+delta_time = 0
+our_snake = Snake()
 
 while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
+    # Check each event that has happened since last frame.
     for event in pygame.event.get():
+        # If the quit event is sent, stop the loop next frame.
         if event.type == pygame.QUIT:
             running = False
 
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    # Fill the screen with a solid color.
+    screen.fill(pygame.Color(50, 50, 50, 255))
 
-    pygame.draw.circle(screen, "red", player_pos, 40)
+    our_snake.update(delta_time)
+    our_snake.draw(screen)
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_w]:
-        player_pos.y -= 300 * dt
-    if keys[pygame.K_s]:
-        player_pos.y += 300 * dt
-    if keys[pygame.K_a]:
-        player_pos.x -= 300 * dt
-    if keys[pygame.K_d]:
-        player_pos.x += 300 * dt
-
-    # flip() the display to put your work on screen
+    # Flip framebuffers to show our drawn content.
     pygame.display.flip()
 
-    # limits FPS to 60
-    # dt is delta time in seconds since last frame, used for framerate-
-    # independent physics.
-    dt = clock.tick(60) / 1000
+    # Sets the delta_time (time since last frame) in seconds.
+    # Since we are calling clock.tick(60), the framerate is also limited to 60 FPS.
+    delta_time = clock.tick(60) / 1000.0
 
 pygame.quit()
