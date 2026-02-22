@@ -3,7 +3,9 @@ from modules.snake import Snake
 
 # Initialize Pygame.
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+width = 1280
+height = 720
+screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 delta_time = 0
@@ -19,7 +21,10 @@ while running:
     # Fill the screen with a solid color.
     screen.fill(pygame.Color(50, 50, 50, 255))
 
-    our_snake.update(delta_time)
+    # Key inputs
+    keys = pygame.key.get_pressed()
+
+    our_snake.update(delta_time, keys)
     our_snake.draw(screen)
 
     # Flip framebuffers to show our drawn content.
