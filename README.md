@@ -4,7 +4,7 @@
 This repository uses Poetry for package management.
 Installing the repository consists of installing Poetry
 and cloning the repository. Then, you can install all of the
-Poetry dependencies by running `poetry install`.
+Poetry dependencies by running `poetry install --no-root`.
 
 > [!NOTE]
 > You can find more info for
