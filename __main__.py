@@ -12,8 +12,7 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 delta_time = 0
-player = Player()
-map = Map(width, height, player)
+map = Map(width, height)
 
 while running:
     # Check each event that has happened since last frame.
@@ -25,13 +24,7 @@ while running:
     # Fill the screen with a solid color.
     screen.fill(pygame.Color(50, 50, 50, 255))
 
-    # Get key inputs.
-    keys = pygame.key.get_pressed()
-
-    player.handle_input(delta_time, keys)
-    player.update(delta_time)
-    player.draw(screen)
-
+    # Update and draw the map.
     map.update(delta_time)
     map.draw(screen)
 
