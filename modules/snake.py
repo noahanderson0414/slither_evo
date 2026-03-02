@@ -7,6 +7,12 @@ class Snake:
         self.direction = pygame.Vector2(1.0, 0.0)
         self.speed = 200.0
         self.length = 100
+        self.xp = 0
+
+
+    def gain_xp(self):
+        # Xp function, can sort it out later
+        self.xp += 1
 
     def update(self, delta_time: float) -> None:
         # Add the old position to position_history.
@@ -16,6 +22,7 @@ class Snake:
 
         # Integrate our velocity (direction * magnitude) to position.
         self.position += self.direction * self.speed * delta_time
+
 
     def draw(self, surface: pygame.Surface) -> None:
         # Draw a circle at the current position of the Snake and all positions in the history.
