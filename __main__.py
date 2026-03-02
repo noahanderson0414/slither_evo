@@ -1,9 +1,11 @@
 import pygame
+
+from modules.map import Map
 from modules.snake import Snake
 from modules.player import Player
 
 # Initialize Pygame.
-pygame.init()
+# pygame.init()
 width = 1280
 height = 720
 screen = pygame.display.set_mode((width, height))
@@ -11,6 +13,7 @@ clock = pygame.time.Clock()
 running = True
 delta_time = 0
 player = Player()
+map = Map(width, height, player)
 
 while running:
     # Check each event that has happened since last frame.
@@ -28,6 +31,9 @@ while running:
     player.handle_input(delta_time, keys)
     player.update(delta_time)
     player.draw(screen)
+
+    map.update(delta_time)
+    map.draw(screen)
 
     # Flip framebuffers to show our drawn content.
     pygame.display.flip()
