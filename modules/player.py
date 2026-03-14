@@ -2,8 +2,8 @@ import pygame
 from modules.snake import Snake
 
 class Player(Snake):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, width, height):
+        super().__init__(width, height)
         self.turn_speed = 200.0
 
     def handle_input(self, delta_time: float, keys) -> None:
