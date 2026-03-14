@@ -1,20 +1,24 @@
 import pygame
 from modules.food import Food
 from modules.player import Player
+from modules.enemy import Enemy
 
 class Map:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.player = Player()
+        self.player = Player(width, height)
         self.foods = []
         self.spawn_timer = 0
         self.spawn_interval = 2
+        self.enemies = []
+        self.enemies.append(Enemy(width, height))
+
 
     def update(self, delta_time):
         # Recreate the player if it dies.
         if self.player.dead:
-            self.player = Player()
+            self.player = Player(self.width, self.height)
 
         # Get key inputs.
         keys = pygame.key.get_pressed()
@@ -22,6 +26,10 @@ class Map:
         # Handle input and update the player.
         self.player.handle_input(delta_time, keys)
         self.player.update(delta_time)
+
+        # Creating enemy ai
+        for enemy in self.enemies:
+            enemy.update(delta_time)
 
         # If player and food radius cross, remove the food and give the player xp
         for food in self.foods.copy():
@@ -37,6 +45,10 @@ class Map:
     def draw(self, screen):
         # Draw the player.
         self.player.draw(screen)
+
+        # Draw the enemy ai
+        for enemies in self.enemies:
+            enemies.draw(screen)
 
         # Drawing food into the game
         for food in self.foods:
