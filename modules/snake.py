@@ -18,7 +18,7 @@ class Snake:
         self.xp += 1
 
     def update(self, delta_time: float) -> None:
-        #
+        # Bounces you off the edge of you run off the map
         if self.position.x > self.width:
             self.direction.x = -self.direction.x
         if self.position.x < 0:

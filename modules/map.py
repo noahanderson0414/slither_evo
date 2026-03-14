@@ -27,6 +27,21 @@ class Map:
         self.player.handle_input(delta_time, keys)
         self.player.update(delta_time)
 
+        # If player collides with enemy body, player dies
+        for enemy in self.enemies:
+            for i in enemy.position_history:
+                if i.distance_to(self.player.position) <= (self.player.radius + enemy.radius):
+                    self.player.dead = True
+
+
+        # If enemy ai collides with player body, enemy dies
+        for enemy in self.enemies.copy():
+            for i in self.player.position_history:
+                if i.distance_to(enemy.position) <= (self.player.radius + enemy.radius):
+                    enemy.dead = True
+                    self.enemies.remove(enemy)
+                    break
+
         # Creating enemy ai
         for enemy in self.enemies:
             enemy.update(delta_time)
