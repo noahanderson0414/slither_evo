@@ -13,6 +13,10 @@ class Map:
         self.spawn_interval = 2
         self.enemies = []
         self.enemies.append(Enemy(width, height))
+        self.wave_number = 1
+        self.wave_timer = 0
+        self.enemy_spawn_timer = 0
+        self.enemy_spawn_interval = 8
 
 
     def update(self, delta_time):
@@ -52,10 +56,23 @@ class Map:
                 self.foods.remove(food)
                 self.player.gain_xp()
 
+        # Spawn interval timer for food
         self.spawn_timer += delta_time
         if self.spawn_timer >= self.spawn_interval:
             self.spawn_timer = 0
             self.foods.append(Food(self.width, self.height))
+
+        # Keeps track of the time in the current wave, each wave is 60 seconds
+        self.wave_timer += delta_time
+        if self.wave_timer >= 60:
+            self.wave_timer = 0
+            self.wave_number += 1
+
+        # Spawn interval timer for enemy
+        self.enemy_spawn_timer += delta_time
+        if self.enemy_spawn_timer >= self.enemy_spawn_interval:
+            self.enemy_spawn_timer = 0
+            self.enemies.append(Enemy(self.width, self.height))
 
     def draw(self, screen):
         # Draw the player.
