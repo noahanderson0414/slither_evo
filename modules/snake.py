@@ -20,13 +20,17 @@ class Snake:
     def update(self, delta_time: float) -> None:
         # Bounces you off the edge of you run off the map
         if self.position.x > self.width:
-            self.direction.x = -self.direction.x
+            self.position.x = 0
+            self.position.y = self.height - self.position.y
         if self.position.x < 0:
-            self.direction.x = -self.direction.x
+            self.position.x = self.width
+            self.position.y = self.height - self.position.y
         if self.position.y > self.height:
-            self.direction.y = -self.direction.y
+            self.position.y = 0
+            self.position.x = self.width - self.position.x
         if self.position.y < 0:
-            self.direction.y = -self.direction.y
+            self.position.y = self.height
+            self.position.x = self.width - self.position.x
 
         # Add the old position to position_history.
         self.position_history.append(pygame.Vector2(self.position.x, self.position.y))
