@@ -76,6 +76,7 @@ class Map:
             self.wave_timer = 0
             self.wave_number += 1
             self.wave_active = False
+            self.enemy_spawn_interval = max(1, self.enemy_spawn_interval - 0.5)
 
         # Spawn interval timer for enemy
         self.enemy_spawn_timer += delta_time
