@@ -35,4 +35,5 @@ while running:
     # Since we are calling clock.tick(60), the framerate is also limited to 60 FPS.
     delta_time = clock.tick(60) / 1000.0
 
+# Clean up Pygame and quit.
 pygame.quit()
