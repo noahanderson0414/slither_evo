@@ -17,15 +17,23 @@ class Map:
         self.wave_timer = 0
         self.enemy_spawn_timer = 0
         self.enemy_spawn_interval = 8
+        self.wave_active = True
 
 
     def update(self, delta_time):
+        # Get key inputs.
+        keys = pygame.key.get_pressed()
+
+        # Waits for player input before the next wave can start
+        if not self.wave_active:
+            if keys[pygame.K_SPACE]:
+                self.wave_active = True
+            return
+
         # Recreate the player if it dies.
         if self.player.dead:
             self.player = Player(self.width, self.height)
 
-        # Get key inputs.
-        keys = pygame.key.get_pressed()
 
         # Handle input and update the player.
         self.player.handle_input(delta_time, keys)
@@ -67,6 +75,7 @@ class Map:
         if self.wave_timer >= 60:
             self.wave_timer = 0
             self.wave_number += 1
+            self.wave_active = False
 
         # Spawn interval timer for enemy
         self.enemy_spawn_timer += delta_time
