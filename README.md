@@ -11,7 +11,7 @@ and cloning the repository.
 
 ## Usage
 Running Slither.evo is simple:
-just run `poetry run python .`
+just run `poetry run python src/slither_evo/`
 in your shell.
 
 > [!NOTE]

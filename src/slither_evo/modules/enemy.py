@@ -1,5 +1,5 @@
 import pygame
-from modules.snake import Snake
+from .snake import Snake
 import random
 
 class Enemy(Snake):

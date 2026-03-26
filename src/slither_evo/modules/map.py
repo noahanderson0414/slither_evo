@@ -1,7 +1,7 @@
 import pygame
-from modules.food import Food
-from modules.player import Player
-from modules.enemy import Enemy
+from .food import Food
+from .player import Player
+from .enemy import Enemy
 
 class Map:
     """
