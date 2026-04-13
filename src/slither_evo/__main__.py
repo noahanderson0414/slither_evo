@@ -6,6 +6,7 @@ from modules.player import Player
 
 # Initialize Pygame.
 # pygame.init()
+pygame.font.init()
 width = 1280
 height = 720
 screen = pygame.display.set_mode((width, height))

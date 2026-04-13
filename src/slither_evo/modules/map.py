@@ -2,6 +2,7 @@ import pygame
 from .food import Food
 from .player import Player
 from .enemy import Enemy
+from .upgrade import UpgradeMenu
 
 class Map:
     """
@@ -36,7 +37,8 @@ class Map:
         self.enemy_spawn_timer = 0
         self.enemy_spawn_interval = 8
         self.wave_active = True
-
+        self.font = pygame.font.SysFont("Arial", 22)
+        self.upgrade_menu = UpgradeMenu(self.player, self.width, self.height)
 
     def update(self, delta_time):
         """
@@ -51,6 +53,8 @@ class Map:
 
         # Waits for player input before the next wave can start.
         if not self.wave_active:
+            # Prompts upgrade menu.
+            self.upgrade_menu.update(keys)
             if keys[pygame.K_SPACE]:
                 self.wave_active = True
             return
@@ -69,7 +73,6 @@ class Map:
             for i in enemy.position_history:
                 if i.distance_to(self.player.position) <= (self.player.radius + enemy.radius):
                     self.player.dead = True
-
 
         # If Enemy AI collides with Player body, Enemy dies.
         for enemy in self.enemies.copy():
@@ -127,4 +130,16 @@ class Map:
         # Draw all Food.
         for food in self.foods:
             food.draw(surface)
+
+        # Draw the wave number.
+        text = self.font.render(f"Wave: {self.wave_number}", True, (255, 255, 255))
+        surface.blit(text, (10, 10))
+
+        # Draw the experience text.
+        text = self.font.render(f"XP: {self.player.xp}", True, (255, 255, 255))
+        surface.blit(text, (10, 40))
+
+        # Draw the upgrade menu between waves.
+        if not self.wave_active:
+            self.upgrade_menu.draw(surface)
 
