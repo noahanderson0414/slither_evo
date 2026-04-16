@@ -21,12 +21,13 @@ class Snake:
         self.position_history = []
         self.direction = pygame.Vector2(1.0, 0.0)
         self.speed = 200.0
-        self.length = 100
+        self.length = 80
         self.xp = 0
         self.dead = False
         self.width = width
         self.height = height
         self.radius = 25.0
+        self.color = pygame.Color(255, 255, 255, 255)
 
     def gain_xp(self):
         """
@@ -82,6 +83,6 @@ class Snake:
         """
 
         # Draw a circle at the current position of the Snake and all positions in the history.
-        pygame.draw.circle(surface, pygame.Color(255, 255, 255, 255), self.position, self.radius)
+        pygame.draw.circle(surface, self.color, self.position, self.radius)
         for position in self.position_history:
-            pygame.draw.circle(surface, pygame.Color(255, 255, 255, 255), position, self.radius)
+            pygame.draw.circle(surface, self.color, position, self.radius)

@@ -1,8 +1,9 @@
 import pygame
 from .food import Food
 from .player import Player
-from .enemy import Enemy
 from .upgrade import UpgradeMenu
+import random
+from .enemy import Enemy, FastEnemy, SlowEnemy, HunterEnemy
 
 class Map:
     """
@@ -31,7 +32,6 @@ class Map:
         self.spawn_timer = 0
         self.spawn_interval = 2
         self.enemies = []
-        self.enemies.append(Enemy(width, height))
         self.wave_number = 1
         self.wave_timer = 0
         self.enemy_spawn_timer = 0
@@ -110,7 +110,11 @@ class Map:
         self.enemy_spawn_timer += delta_time
         if self.enemy_spawn_timer >= self.enemy_spawn_interval:
             self.enemy_spawn_timer = 0
-            self.enemies.append(Enemy(self.width, self.height))
+            enemy_type = random.choice([FastEnemy, SlowEnemy, HunterEnemy])
+            if enemy_type == HunterEnemy:
+                self.enemies.append(HunterEnemy(self.width, self.height, self.player))
+            else:
+                self.enemies.append(enemy_type(self.width, self.height))
 
     def draw(self, surface: pygame.Surface):
         """
