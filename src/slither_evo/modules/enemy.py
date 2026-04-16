@@ -30,4 +30,43 @@ class Enemy(Snake):
         super().update(delta_time)
 
 
+# Fast but short enemy snake.
+class FastEnemy(Enemy):
+    def __init__(self, width, height):
+        super().__init__(width, height)
+        self.speed = 350.0
+        self.radius = 6
+        self.length = 20
+        # Red.
+        self.color = pygame.Color(255, 100, 100, 255)
+
+# Slow but long enemy snake.
+class SlowEnemy(Enemy):
+    def __init__(self, width, height):
+        super().__init__(width, height)
+        self.speed = 50.0
+        self.radius = 30
+        self.length = 500
+        # Blue.
+        self.color = pygame.Color(100, 100, 255, 255)
+
+# Hunter enemy that steers toward the player.
+class HunterEnemy(Enemy):
+    def __init__(self, width, height, player):
+        super().__init__(width, height)
+        self.speed = 180.0
+        self.radius = 12
+        self.player = player
+        # Purple.
+        self.color = pygame.Color(255, 0, 255, 255)
+
+    def update(self, delta_time):
+        # Calculate direction toward player.
+        to_player = self.player.position - self.position
+        if to_player.length() > 0:
+            to_player = to_player.normalize()
+        # Steer toward player.
+        self.direction = self.direction.lerp(to_player, 0.05).normalize()
+        super(Enemy, self).update(delta_time)
+
 
