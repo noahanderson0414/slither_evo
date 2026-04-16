@@ -143,3 +143,7 @@ class Map:
         if not self.wave_active:
             self.upgrade_menu.draw(surface)
 
+        # Draw the wave time remaining text.
+        text = self.font.render(f"Time: {int(60 - self.wave_timer)}", True, (255, 255, 255))
+        surface.blit(text, (10, 70))
+
