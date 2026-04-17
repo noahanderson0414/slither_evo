@@ -3,6 +3,7 @@ import pygame
 from modules.map import Map
 from modules.snake import Snake
 from modules.player import Player
+from modules.title_screen import TitleScreen
 
 # Initialize Pygame.
 # pygame.init()
@@ -13,6 +14,7 @@ screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 delta_time = 0
+title_screen = TitleScreen(width, height)
 map = Map(width, height)
 
 while running:
@@ -25,9 +27,14 @@ while running:
     # Fill the screen with a solid color.
     screen.fill(pygame.Color(50, 50, 50, 255))
 
-    # Update and draw the map.
-    map.update(delta_time)
-    map.draw(screen)
+    if title_screen.started:
+        # Update and draw the map.
+        map.update(delta_time)
+        map.draw(screen)
+    else:
+        # Update and draw the title screen.
+        title_screen.update()
+        title_screen.draw(screen)
 
     # Flip framebuffers to show our drawn content.
     pygame.display.flip()

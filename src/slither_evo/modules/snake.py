@@ -37,7 +37,7 @@ class Snake:
         # XP function, can sort it out later.
         self.xp += 1
 
-    def update(self, delta_time: float) -> None:
+    def update(self, delta_time):
         """
         Update the physics of the Snake.
 
@@ -74,7 +74,7 @@ class Snake:
                 self.dead = True
         '''
 
-    def draw(self, surface: pygame.Surface) -> None:
+    def draw(self, surface):
         """
         Draw the Snake.
 

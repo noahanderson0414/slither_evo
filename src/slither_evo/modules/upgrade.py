@@ -1,55 +1,72 @@
 import pygame
 
+from .ui.button import UIButton
+from .ui.label import UILabel
+
 class UpgradeMenu:
     def __init__(self, player, width, height):
         self.player = player
         self.width = width
         self.height = height
-        self.font = pygame.font.SysFont("Arial", 30)
+        self.font = pygame.font.SysFont("Arial", 32)
         self.upgrade_costs = {
             "length" : 3,
             "speed": 3,
             "radius": 3
         }
+        self.length_label = UILabel(pygame.Rect(self.width / 2 - 177.5, self.height / 2 - 80, 150, 50), self.font)
+        self.length_button = UIButton(pygame.Rect(self.width / 2 - 22.5, self.height / 2 - 80, 200, 50), self.font, self.try_upgrade_length)
+        self.speed_label = UILabel(pygame.Rect(self.width / 2 - 177.5, self.height / 2 - 25, 150, 50), self.font)
+        self.speed_button = UIButton(pygame.Rect(self.width / 2 - 22.5, self.height / 2 - 25, 200, 50), self.font, self.try_upgrade_speed)
+        self.radius_label = UILabel(pygame.Rect(self.width / 2 - 177.5, self.height / 2 + 30, 150, 50), self.font)
+        self.radius_button = UIButton(pygame.Rect(self.width / 2 - 22.5, self.height / 2 + 30, 200, 50), self.font, self.try_upgrade_radius)
 
-    def update(self, keys):
-        # Input keys 1,2,3 to upgrade player.
-        if keys[pygame.K_1]:
-            if self.player.xp >= self.upgrade_costs["length"]:
-                self.player.xp -= self.upgrade_costs["length"]
-                self.player.length += 10
-        if keys[pygame.K_2]:
-            if self.player.xp >= self.upgrade_costs["speed"]:
-                self.player.xp -= self.upgrade_costs["speed"]
-                self.player.speed += 10
-        if keys[pygame.K_3]:
-            if self.player.xp >= self.upgrade_costs["radius"]:
-                self.player.xp -= self.upgrade_costs["radius"]
-                self.player.radius += 10
+        title_font = pygame.font.SysFont("Arial", 64)
+        self.xp_label = UILabel(pygame.Rect(self.width / 2 - 175, 5, 350, 75), title_font)
+        self.continue_prompt = UILabel(pygame.Rect(self.width / 2 - 350, self.height - 80, 700, 75), title_font, "[PRESS SPACE TO CONTINUE]")
+    
+    def update(self):
+        self.length_button.update()
+        self.speed_button.update()
+        self.radius_button.update()
+    
+    def try_upgrade_length(self):
+        if self.player.xp >= self.upgrade_costs["length"]:
+            self.player.xp -= self.upgrade_costs["length"]
+            self.player.length += 10
+    
+    def try_upgrade_speed(self):
+        if self.player.xp >= self.upgrade_costs["speed"]:
+            self.player.xp -= self.upgrade_costs["speed"]
+            self.player.speed += 10
+    
+    def try_upgrade_radius(self):
+        if self.player.xp >= self.upgrade_costs["radius"]:
+            self.player.xp -= self.upgrade_costs["radius"]
+            self.player.radius += 10
 
     def draw(self, screen):
         # Screen text between waves showing upgrades.
+
         # Length
-        # Length
-        text = self.font.render(f"Length: {self.player.length}", True, (255, 255, 255))
-        screen.blit(text, ((self.width - text.get_width()) // 2, 250))
-        text = self.font.render(f"1 - Upgrade Length (Cost: {self.upgrade_costs['length']} XP)", True, (255, 255, 255))
-        screen.blit(text, ((self.width - text.get_width()) // 2, 290))
+        self.length_label.text = f"Length: {self.player.length}"
+        self.length_label.draw(screen)
+        self.length_button.text = f"Upgrade ({self.upgrade_costs["length"]} XP)"
+        self.length_button.draw(screen)
 
         # Speed
-        text = self.font.render(f"Speed: {self.player.speed}", True, (255, 255, 255))
-        screen.blit(text, ((self.width - text.get_width()) // 2, 340))
-        text = self.font.render(f"2 - Upgrade Speed (Cost: {self.upgrade_costs['speed']} XP)", True, (255, 255, 255))
-        screen.blit(text, ((self.width - text.get_width()) // 2, 380))
+        self.speed_label.text = f"Speed: {self.player.speed}"
+        self.speed_label.draw(screen)
+        self.speed_button.text = f"Upgrade ({self.upgrade_costs["speed"]} XP)"
+        self.speed_button.draw(screen)
 
         # Radius
-        text = self.font.render(f"Radius: {self.player.radius}", True, (255, 255, 255))
-        screen.blit(text, ((self.width - text.get_width()) // 2, 430))
-        text = self.font.render(f"3 - Upgrade Radius (Cost: {self.upgrade_costs['radius']} XP)", True, (255, 255, 255))
-        screen.blit(text, ((self.width - text.get_width()) // 2, 470))
+        self.radius_label.text = f"Radius: {self.player.radius}"
+        self.radius_label.draw(screen)
+        self.radius_button.text = f"Upgrade ({self.upgrade_costs["radius"]} XP)"
+        self.radius_button.draw(screen)
 
-        # XP and prompt
-        text = self.font.render(f"XP: {self.player.xp}", True, (255, 255, 0))
-        screen.blit(text, ((self.width - text.get_width()) // 2, 530))
-        text = self.font.render("Press SPACE to continue", True, (200, 200, 200))
-        screen.blit(text, ((self.width - text.get_width()) // 2, 570))
+        # XP and Continue Prompt
+        self.xp_label.text = f"XP: {self.player.xp}"
+        self.xp_label.draw(screen)
+        self.continue_prompt.draw(screen)

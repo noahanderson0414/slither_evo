@@ -4,6 +4,7 @@ from .player import Player
 from .upgrade import UpgradeMenu
 import random
 from .enemy import Enemy, FastEnemy, SlowEnemy, HunterEnemy
+from .ui.label import UILabel
 
 class Map:
     """
@@ -37,7 +38,10 @@ class Map:
         self.enemy_spawn_timer = 0
         self.enemy_spawn_interval = 8
         self.wave_active = True
-        self.font = pygame.font.SysFont("Arial", 22)
+        self.font = pygame.font.SysFont("Arial", 32)
+        self.wave_label = UILabel(pygame.Rect(5, 5, 125, 50), self.font)
+        self.experience_label = UILabel(pygame.Rect(5, 60, 125, 50), self.font)
+        self.time_label = UILabel(pygame.Rect(5, 115, 125, 50), self.font)
         self.upgrade_menu = UpgradeMenu(self.player, self.width, self.height)
 
     def update(self, delta_time):
@@ -53,10 +57,11 @@ class Map:
 
         # Waits for player input before the next wave can start.
         if not self.wave_active:
-            # Prompts upgrade menu.
-            self.upgrade_menu.update(keys)
+            # Update upgrade menu and continue to next wave if player presses space.
+            self.upgrade_menu.update()
             if keys[pygame.K_SPACE]:
                 self.wave_active = True
+
             return
 
         # Recreate the player if it dies.
@@ -116,7 +121,7 @@ class Map:
             else:
                 self.enemies.append(enemy_type(self.width, self.height))
 
-    def draw(self, surface: pygame.Surface):
+    def draw(self, surface):
         """
         Draw every object in the Map.
 
@@ -136,18 +141,20 @@ class Map:
             food.draw(surface)
 
         # Draw the wave number.
-        text = self.font.render(f"Wave: {self.wave_number}", True, (255, 255, 255))
-        surface.blit(text, (10, 10))
+        self.wave_label.text = f"Wave: {self.wave_number}"
+        self.wave_label.draw(surface)
 
         # Draw the experience text.
-        text = self.font.render(f"XP: {self.player.xp}", True, (255, 255, 255))
-        surface.blit(text, (10, 40))
+        self.experience_label.text = f"XP: {self.player.xp}"
+        self.experience_label.draw(surface)
+
+        # Draw the wave time remaining text.
+        self.time_label.text = f"Time: {int(60 - self.wave_timer)}"
+        self.time_label.draw(surface)
 
         # Draw the upgrade menu between waves.
         if not self.wave_active:
             self.upgrade_menu.draw(surface)
 
-        # Draw the wave time remaining text.
-        text = self.font.render(f"Time: {int(60 - self.wave_timer)}", True, (255, 255, 255))
-        surface.blit(text, (10, 70))
+        
 
