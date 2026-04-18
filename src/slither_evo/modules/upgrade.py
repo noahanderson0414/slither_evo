@@ -1,10 +1,23 @@
 import pygame
-
 from .ui.button import UIButton
 from .ui.label import UILabel
 
 class UpgradeMenu:
+    """
+    Class that represents the upgrade menu shown between waves.
+    Allows the player to spend XP on upgrades.
+    """
+
     def __init__(self, player, width, height):
+        """
+        Initialize the UpgradeMenu.
+
+        Arguments:
+          - player: Player: The player to upgrade.
+          - width: int: Width of the Map.
+          - height: int: Height of the Map.
+        """
+
         self.player = player
         self.width = width
         self.height = height
@@ -24,28 +37,51 @@ class UpgradeMenu:
         title_font = pygame.font.SysFont("Arial", 64)
         self.xp_label = UILabel(pygame.Rect(self.width / 2 - 175, 5, 350, 75), title_font)
         self.continue_prompt = UILabel(pygame.Rect(self.width / 2 - 350, self.height - 80, 700, 75), title_font, "[PRESS SPACE TO CONTINUE]")
-    
+
     def update(self):
+        """
+        Update the UpgradeMenu.
+        """
+
         self.length_button.update()
         self.speed_button.update()
         self.radius_button.update()
-    
+
     def try_upgrade_length(self):
+        """
+        Attempt to upgrade the player's length.
+        """
+
         if self.player.xp >= self.upgrade_costs["length"]:
             self.player.xp -= self.upgrade_costs["length"]
             self.player.length += 10
-    
+
     def try_upgrade_speed(self):
+        """
+        Attempt to upgrade the player's speed.
+        """
+
         if self.player.xp >= self.upgrade_costs["speed"]:
             self.player.xp -= self.upgrade_costs["speed"]
             self.player.speed += 10
-    
+
     def try_upgrade_radius(self):
+        """
+        Attempt to upgrade the player's radius.
+        """
+
         if self.player.xp >= self.upgrade_costs["radius"]:
             self.player.xp -= self.upgrade_costs["radius"]
             self.player.radius += 10
 
     def draw(self, screen):
+        """
+        Draw the UpgradeMenu.
+
+        Arguments:
+          - screen: Surface: The Surface to draw the UpgradeMenu to.
+        """
+
         # Screen text between waves showing upgrades.
 
         # Length

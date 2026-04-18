@@ -6,7 +6,19 @@ from .ui.label import UILabel
 from .ui.button import UIButton
 
 class TitleScreen:
+    """
+    Class that represents the title screen shown when the game launches.
+    """
+
     def __init__(self, width, height):
+        """
+        Initialize the TitleScreen.
+
+        Arguments:
+          - width: int: Width of the screen.
+          - height: int: Height of the screen.
+        """
+
         self.width = width
         self.height = height
         self.player_color = 0
@@ -30,13 +42,21 @@ class TitleScreen:
         self.previous_color_button = UIButton(pygame.Rect(self.width / 2 - 122.5, self.height / 2 + 42.5, 50, 75), self.large_font, self.try_previous_color, text = "<")
         self.map = None
         self.started = False
-    
+
     def update(self):
+        """
+        Update the TitleScreen.
+        """
+
         self.start_button.update()
         self.next_color_button.update()
         self.previous_color_button.update()
-    
+
     def try_start(self):
+        """
+        Start the game.
+        """
+
         self.started = True
         self.map = Map(self.width, self.height, self.colors[self.player_color])
     
@@ -49,6 +69,13 @@ class TitleScreen:
         self.color_rect.background_color = self.colors[self.player_color]
     
     def draw(self, surface):
+        """
+        Draw the TitleScreen.
+
+        Arguments:
+          - surface: Surface: The Surface to draw the TitleScreen to.
+        """
+
         self.title_label.draw(surface)
         self.creators_label.draw(surface)
         self.start_button.draw(surface)
