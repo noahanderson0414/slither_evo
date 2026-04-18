@@ -30,37 +30,80 @@ class Enemy(Snake):
         super().update(delta_time)
 
 
-# Fast but short enemy snake.
 class FastEnemy(Enemy):
+    """
+    Class that inherits from Enemy.
+    Fast but short enemy snake.
+    """
+
     def __init__(self, width, height):
+        """
+        Initialize the FastEnemy.
+
+        Arguments:
+          - width: int: Width of the Map.
+          - height: int: Height of the Map.
+        """
+
         super().__init__(width, height)
         self.speed = 350.0
         self.radius = 6
         self.length = 20
-        # Red.
         self.color = pygame.Color(255, 100, 100, 255)
 
-# Slow but long enemy snake.
+
 class SlowEnemy(Enemy):
+    """
+    Class that inherits from Enemy.
+    Slow but long enemy snake.
+    """
+
     def __init__(self, width, height):
+        """
+        Initialize the SlowEnemy.
+
+        Arguments:
+          - width: int: Width of the Map.
+          - height: int: Height of the Map.
+        """
+
         super().__init__(width, height)
         self.speed = 50.0
         self.radius = 30
         self.length = 500
-        # Blue.
         self.color = pygame.Color(100, 100, 255, 255)
 
-# Hunter enemy that steers toward the player.
+
 class HunterEnemy(Enemy):
+    """
+    Class that inherits from Enemy.
+    Steers toward the player.
+    """
+
     def __init__(self, width, height, player):
+        """
+        Initialize the HunterEnemy.
+
+        Arguments:
+          - width: int: Width of the Map.
+          - height: int: Height of the Map.
+          - player: Player: The player to hunt.
+        """
+
         super().__init__(width, height)
         self.speed = 180.0
         self.radius = 12
         self.player = player
-        # Purple.
         self.color = pygame.Color(255, 0, 255, 255)
 
     def update(self, delta_time):
+        """
+        Update the physics state of the HunterEnemy.
+
+        Arguments:
+          - delta_time: float: Time since last frame.
+        """
+
         # Calculate direction toward player.
         to_player = self.player.position - self.position
         if to_player.length() > 0:
@@ -68,5 +111,3 @@ class HunterEnemy(Enemy):
         # Steer toward player.
         self.direction = self.direction.lerp(to_player, 0.05).normalize()
         super(Enemy, self).update(delta_time)
-
-
