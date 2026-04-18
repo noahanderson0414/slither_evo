@@ -14,9 +14,10 @@ class Snake:
       - width: int: Width of the Map.
       - height: int: Height of the Map.
       - radius: float: Radius of each segment of the Snake.
+      - color: Color: Color to draw the Snake with.
     """
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, color = pygame.Color(255, 255, 255, 255)):
         self.position = pygame.Vector2()
         self.position_history = []
         self.direction = pygame.Vector2(1.0, 0.0)
@@ -27,7 +28,7 @@ class Snake:
         self.width = width
         self.height = height
         self.radius = 25.0
-        self.color = pygame.Color(255, 255, 255, 255)
+        self.color = color
 
     def gain_xp(self):
         """

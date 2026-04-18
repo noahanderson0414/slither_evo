@@ -7,8 +7,8 @@ class Player(Snake):
     Adds user input for movement.
     """
 
-    def __init__(self, width, height):
-        super().__init__(width, height)
+    def __init__(self, width, height, color = pygame.Color(255, 255, 255, 255)):
+        super().__init__(width, height, color)
         self.position = pygame.Vector2(width / 2, height / 2)
         self.turn_speed = 200.0
 

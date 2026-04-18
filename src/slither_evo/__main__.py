@@ -6,16 +6,16 @@ from modules.player import Player
 from modules.title_screen import TitleScreen
 
 # Initialize Pygame.
-# pygame.init()
+pygame.init()
 pygame.font.init()
 width = 1280
 height = 720
+pygame.display.set_caption("Slither.evo")
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 delta_time = 0
 title_screen = TitleScreen(width, height)
-map = Map(width, height)
 
 while running:
     # Check each event that has happened since last frame.
@@ -29,8 +29,8 @@ while running:
 
     if title_screen.started:
         # Update and draw the map.
-        map.update(delta_time)
-        map.draw(screen)
+        title_screen.map.update(delta_time)
+        title_screen.map.draw(screen)
     else:
         # Update and draw the title screen.
         title_screen.update()

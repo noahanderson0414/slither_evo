@@ -13,6 +13,7 @@ class Map:
     Attributes:
       - width: int: Width of the Map.
       - height: int: Height of the Map.
+      - player_color: Color: The color of the main Player.
       - player: Player: The main Player.
       - foods: List[Food]: All of the Food on the Map.
       - spawn_timer: float: Time remaining for Food to be spawned.
@@ -25,10 +26,11 @@ class Map:
       - wave_active: bool: If a wave is currently active.
     """
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, player_color = pygame.Color(255, 255, 255, 255)):
         self.width = width
         self.height = height
-        self.player = Player(width, height)
+        self.player_color = player_color
+        self.player = Player(width, height, player_color)
         self.foods = []
         self.spawn_timer = 0
         self.spawn_interval = 2
@@ -66,8 +68,7 @@ class Map:
 
         # Recreate the player if it dies.
         if self.player.dead:
-            self.player = Player(self.width, self.height)
-
+            self.player = Player(self.width, self.height, self.player_color)
 
         # Handle input and update the Player.
         self.player.handle_input(delta_time, keys)
