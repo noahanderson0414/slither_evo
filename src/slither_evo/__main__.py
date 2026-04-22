@@ -1,21 +1,24 @@
+"""
+Entry-point for the program.
+"""
+
 import pygame
 
-from modules.map import Map
-from modules.snake import Snake
-from modules.player import Player
-from modules.title_screen import TitleScreen
+from slither_evo.modules.title_screen import TitleScreen
+
+# Define constant variables.
+WIDTH = 1280
+HEIGHT = 720
 
 # Initialize Pygame.
 pygame.init()
 pygame.font.init()
-width = 1280
-height = 720
 pygame.display.set_caption("Slither.evo")
-screen = pygame.display.set_mode((width, height))
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 running = True
 delta_time = 0
-title_screen = TitleScreen(width, height)
+title_screen = TitleScreen(WIDTH, HEIGHT)
 
 while running:
     # Check each event that has happened since last frame.

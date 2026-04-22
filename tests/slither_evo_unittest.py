@@ -1,12 +1,19 @@
+"""
+Initializes pygame and tests various features of the program.
+"""
+
 import sys
 import os
 import unittest
+
 import pygame
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
-pygame.font.init()
+
 from slither_evo.modules.snake import Snake
 from slither_evo.modules.player import Player
 from slither_evo.modules.upgrade import UpgradeMenu
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+pygame.font.init()
 
 class TestXP(unittest.TestCase):
     """Tests for XP system."""

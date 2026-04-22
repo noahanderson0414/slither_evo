@@ -1,3 +1,7 @@
+"""
+Defines the Snake class.
+"""
+
 import pygame
 
 class Snake:
@@ -69,11 +73,9 @@ class Snake:
         self.position += self.direction * self.speed * delta_time
 
         # Commenting out self-collision code for now to try and test movement functions.
-        '''
         for i in range(len(self.position_history) - 50):
             if self.position.distance_to(self.position_history[i]) <= 50.0:
                 self.dead = True
-        '''
 
     def draw(self, surface):
         """

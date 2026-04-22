@@ -1,9 +1,13 @@
+"""
+Defines the TitleScreen class.
+"""
+
 import pygame
 
-from .map import Map
-from .ui.element import UIElement
-from .ui.label import UILabel
-from .ui.button import UIButton
+from slither_evo.modules.map import Map
+from slither_evo.modules.ui.element import UIElement
+from slither_evo.modules.ui.label import UILabel
+from slither_evo.modules.ui.button import UIButton
 
 class TitleScreen:
     """
@@ -35,7 +39,7 @@ class TitleScreen:
         self.large_font = pygame.font.SysFont("Arial", 64)
         self.small_font = pygame.font.SysFont("Arial", 24)
         self.title_label = UILabel(pygame.Rect(self.width / 2 - 200, 5, 400, 75), self.large_font, "Slither.evo")
-        self.creators_label = UILabel(pygame.Rect(self.width / 2 - 200, self.height - 55, 400, 50), self.small_font, "Created by Noah Anderson & Jonathan Pomeroy")
+        self.creators_label = UILabel(pygame.Rect(self.width / 2 - 300, self.height - 55, 600, 50), self.small_font, "Created by Noah Anderson & Jonathan Pomeroy")
         self.start_button = UIButton(pygame.Rect(self.width / 2 - 125, self.height / 2 - 37.5, 250, 75), self.large_font, self.try_start, text = "Start!")
         self.color_rect = UIElement(pygame.Rect(self.width / 2 - 67.5, self.height / 2 + 42.5, 135, 75), self.colors[self.player_color])
         self.next_color_button = UIButton(pygame.Rect(self.width / 2 + 72.5, self.height / 2 + 42.5, 50, 75), self.large_font, self.try_next_color, text = ">")
@@ -59,15 +63,23 @@ class TitleScreen:
 
         self.started = True
         self.map = Map(self.width, self.height, self.colors[self.player_color])
-    
+
     def try_next_color(self):
+        """
+        Set the player color to the next color.
+        """
+
         self.player_color = (self.player_color + 1) % len(self.colors)
         self.color_rect.background_color = self.colors[self.player_color]
 
     def try_previous_color(self):
+        """
+        Set the player color to the previous color.
+        """
+
         self.player_color = (self.player_color - 1) % len(self.colors)
         self.color_rect.background_color = self.colors[self.player_color]
-    
+
     def draw(self, surface):
         """
         Draw the TitleScreen.

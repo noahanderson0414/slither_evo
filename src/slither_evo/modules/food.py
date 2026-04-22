@@ -1,5 +1,10 @@
-import pygame
+"""
+Defines the Food class.
+"""
+
 import random
+
+import pygame
 
 class Food:
     """

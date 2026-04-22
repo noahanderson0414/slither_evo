@@ -1,6 +1,11 @@
+"""
+Defines the UpgradeMenu class.
+"""
+
 import pygame
-from .ui.button import UIButton
-from .ui.label import UILabel
+
+from slither_evo.modules.ui.button import UIButton
+from slither_evo.modules.ui.label import UILabel
 
 class UpgradeMenu:
     """
@@ -27,16 +32,16 @@ class UpgradeMenu:
             "speed": 3,
             "radius": 3
         }
-        self.length_label = UILabel(pygame.Rect(self.width / 2 - 177.5, self.height / 2 - 80, 150, 50), self.font)
-        self.length_button = UIButton(pygame.Rect(self.width / 2 - 22.5, self.height / 2 - 80, 200, 50), self.font, self.try_upgrade_length)
-        self.speed_label = UILabel(pygame.Rect(self.width / 2 - 177.5, self.height / 2 - 25, 150, 50), self.font)
-        self.speed_button = UIButton(pygame.Rect(self.width / 2 - 22.5, self.height / 2 - 25, 200, 50), self.font, self.try_upgrade_speed)
-        self.radius_label = UILabel(pygame.Rect(self.width / 2 - 177.5, self.height / 2 + 30, 150, 50), self.font)
-        self.radius_button = UIButton(pygame.Rect(self.width / 2 - 22.5, self.height / 2 + 30, 200, 50), self.font, self.try_upgrade_radius)
+        self.length_label = UILabel(pygame.Rect(self.width / 2 - 275, self.height / 2 - 80, 250, 50), self.font)
+        self.length_button = UIButton(pygame.Rect(self.width / 2 - 20, self.height / 2 - 80, 300, 50), self.font, self.try_upgrade_length)
+        self.speed_label = UILabel(pygame.Rect(self.width / 2 - 275, self.height / 2 - 25, 250, 50), self.font)
+        self.speed_button = UIButton(pygame.Rect(self.width / 2 - 20, self.height / 2 - 25, 300, 50), self.font, self.try_upgrade_speed)
+        self.radius_label = UILabel(pygame.Rect(self.width / 2 - 275, self.height / 2 + 30, 250, 50), self.font)
+        self.radius_button = UIButton(pygame.Rect(self.width / 2 - 20, self.height / 2 + 30, 300, 50), self.font, self.try_upgrade_radius)
 
         title_font = pygame.font.SysFont("Arial", 64)
         self.xp_label = UILabel(pygame.Rect(self.width / 2 - 175, 5, 350, 75), title_font)
-        self.continue_prompt = UILabel(pygame.Rect(self.width / 2 - 350, self.height - 80, 700, 75), title_font, "[PRESS SPACE TO CONTINUE]")
+        self.continue_prompt = UILabel(pygame.Rect(self.width / 2 - 500, self.height - 80, 1000, 75), title_font, "[PRESS SPACE TO CONTINUE]")
 
     def update(self):
         """

@@ -1,10 +1,16 @@
-import pygame
-from .food import Food
-from .player import Player
-from .upgrade import UpgradeMenu
+"""
+Defines the Map class.
+"""
+
 import random
-from .enemy import Enemy, FastEnemy, SlowEnemy, HunterEnemy
-from .ui.label import UILabel
+
+import pygame
+
+from slither_evo.modules.food import Food
+from slither_evo.modules.player import Player
+from slither_evo.modules.upgrade import UpgradeMenu
+from slither_evo.modules.enemy import FastEnemy, SlowEnemy, HunterEnemy
+from slither_evo.modules.ui.label import UILabel
 
 class Map:
     """
@@ -41,9 +47,9 @@ class Map:
         self.enemy_spawn_interval = 8
         self.wave_active = True
         self.font = pygame.font.SysFont("Arial", 32)
-        self.wave_label = UILabel(pygame.Rect(5, 5, 125, 50), self.font)
-        self.experience_label = UILabel(pygame.Rect(5, 60, 125, 50), self.font)
-        self.time_label = UILabel(pygame.Rect(5, 115, 125, 50), self.font)
+        self.wave_label = UILabel(pygame.Rect(5, 5, 175, 50), self.font)
+        self.experience_label = UILabel(pygame.Rect(5, 60, 175, 50), self.font)
+        self.time_label = UILabel(pygame.Rect(5, 115, 175, 50), self.font)
         self.upgrade_menu = UpgradeMenu(self.player, self.width, self.height)
 
     def update(self, delta_time):
@@ -106,7 +112,7 @@ class Map:
 
         # Keeps track of the time in the current wave. Each wave is 60 seconds.
         self.wave_timer += delta_time
-        if self.wave_timer >= 60:
+        if self.wave_timer >= 3:
             self.wave_timer = 0
             self.wave_number += 1
             self.wave_active = False
@@ -157,6 +163,3 @@ class Map:
         # Draw the upgrade menu between waves.
         if not self.wave_active:
             self.upgrade_menu.draw(surface)
-
-        
-

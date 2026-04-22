@@ -1,6 +1,12 @@
-import pygame
-from .snake import Snake
+"""
+Defines the Enemy class and special child classes.
+"""
+
 import random
+
+import pygame
+
+from slither_evo.modules.snake import Snake
 
 class Enemy(Snake):
     """

@@ -1,5 +1,10 @@
+"""
+Defines the Player class.
+"""
+
 import pygame
-from .snake import Snake
+
+from slither_evo.modules.snake import Snake
 
 class Player(Snake):
     """

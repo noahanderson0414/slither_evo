@@ -1,6 +1,18 @@
+"""
+Defines the UIElement class.
+"""
+
 import pygame
 
 class UIElement:
+    """
+    A basic UI element that is just a rect with a user defined size.
+
+    Attributes:
+    - rect: Rect: The rect to be drawn.
+    - background_color: Color: The color of the drawn rect.
+    - border_radius: float: The radius of the circular borders.
+    """
     def __init__(
         self,
         rect,
@@ -12,6 +24,13 @@ class UIElement:
         self.border_radius = border_radius
 
     def draw(self, surface):
+        """
+        Draw the UI element onto a surface.
+
+        Arguments:
+        - surface: Surface: The surface to draw to.
+        """
+
         # Create a temporary surface so we can draw with transparency.
         temp_surface = pygame.Surface(self.rect.size, pygame.SRCALPHA)
 
