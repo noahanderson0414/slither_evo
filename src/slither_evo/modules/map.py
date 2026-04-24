@@ -44,7 +44,7 @@ class Map:
         self.wave_number = 1
         self.wave_timer = 0
         self.enemy_spawn_timer = 0
-        self.enemy_spawn_interval = 8
+        self.enemy_spawn_interval = 6
         self.wave_active = True
         self.font = pygame.font.SysFont("Arial", 32)
         self.wave_label = UILabel(pygame.Rect(5, 5, 175, 50), self.font)
@@ -112,7 +112,7 @@ class Map:
 
         # Keeps track of the time in the current wave. Each wave is 60 seconds.
         self.wave_timer += delta_time
-        if self.wave_timer >= 3:
+        if self.wave_timer >= 60:
             self.wave_timer = 0
             self.wave_number += 1
             self.wave_active = False

@@ -11,7 +11,7 @@ WIDTH = 1280
 HEIGHT = 720
 
 # Initialize Pygame.
-pygame.init()
+#pygame.init()
 pygame.font.init()
 pygame.display.set_caption("Slither.evo")
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
