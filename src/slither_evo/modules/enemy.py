@@ -15,8 +15,16 @@ class Enemy(Snake):
     """
 
     def __init__(self, width, height):
+        """
+        Initialize the Enemy.
+
+        Arguments:
+            - width: int: Width of the Map.
+            - height: int: Height of the Map.
+        """
         super().__init__(width, height)
 
+        # Override position to spawn at a random location on the map.
         x = random.randint(0, width)
         y = random.randint(0, height)
         self.position = pygame.Vector2(x, y)
@@ -72,7 +80,6 @@ class SlowEnemy(Enemy):
           - width: int: Width of the Map.
           - height: int: Height of the Map.
         """
-
         super().__init__(width, height)
         self.speed = 50.0
         self.radius = 30
