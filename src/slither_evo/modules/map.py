@@ -30,6 +30,10 @@ class Map:
       - enemy_spawn_timer: float: Time remaining to spawn an Enemy.
       - enemy_spawn_interval: float: How often to spawn an Enemy.
       - wave_active: bool: If a wave is currently active.
+      - font: Font: The Font to use for UI.
+      - experience_label: UILabel: Label that shows Player XP.
+      - time_label: UILabel: Label that shows time remaining in wave.
+      - upgrade_menu: UpgradeMenu: Menu the Player uses to upgrade.
     """
 
     def __init__(self, width, height, player_color = pygame.Color(255, 255, 255, 255)):

@@ -12,6 +12,22 @@ from slither_evo.modules.ui.button import UIButton
 class TitleScreen:
     """
     Class that represents the title screen shown when the game launches.
+
+    Attributes:
+      - width: int: Width of the screen.
+      - height: int: Height of the screen.
+      - player_color: int: Active Player color.
+      - colors: List[Color]: The List of Colors to iterate through for the Player.
+      - large_font: Font: The large Font to draw the UI with.
+      - small_font: Font: The small Font to draw the UI with.
+      - title_label: UILabel: Label that shows the game title.
+      - creators_label: UILabel: Label that shows the game developers.
+      - start_button: UIButton: Button that starts the game when clicked.
+      - color_rect: UIElement: Rect that shows the selected Player color.
+      - next_color_button: UIButton: Button that selects the next Player color when clicked.
+      - previous_color_button: UIButton: Button that selects the previous Player color when clicked.
+      - map: Map: The active Map/game world.
+      - started: bool: Whether the game has started or not.
     """
 
     def __init__(self, width, height):
